@@ -1,0 +1,138 @@
+<div class="container" #container>
+  <div class="form-container sign-up-container">
+    <form [formGroup]="myForm" (ngSubmit)="Onsubmit(myForm)">
+      <h1>Create Account</h1>
+      <div class="social-container">
+        <a href="#" class="social"><mat-icon>facebook</mat-icon></a>
+        <a href="#" class="social"><mat-icon>facebook</mat-icon></a>
+        <a href="#" class="social"><mat-icon>facebook</mat-icon></a>
+      </div>
+      <span>or use your email for registration</span>
+
+      <!-- <mat-form-field appearance="fill" color="primary">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter Your First Name"
+          formControlName="firstname"
+        />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error> First Name is <strong>required</strong></mat-error>
+      </mat-form-field> -->
+
+      <input
+        matInput
+        type="text"
+        placeholder="Name"
+        formControlName="username"
+      />
+      <div
+        *ngIf="
+          myForm.get('username')?.invalid &&
+          (myForm.get('username')?.dirty || myForm.get('username')?.touched)
+        "
+        color="accent"
+      >
+        Please provide a name.
+      </div>
+      <input type="email" placeholder="Email" formControlName="email" />
+      <mat-error
+        *ngIf="
+          myForm.get('email')?.invalid &&
+          (myForm.get('email')?.dirty || myForm.get('email')?.touched)
+        "
+        color="accent"
+      >
+        Please provide a valid email address.
+      </mat-error>
+
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <mat-error
+        *ngIf="
+          myForm.get('password')?.touched &&
+          myForm.get('password')?.hasError('required')
+        "
+        color="accent"
+      >
+        Password is required
+      </mat-error>
+      <mat-error
+        *ngIf="
+          myForm.get('password')?.touched &&
+          myForm.get('password')?.hasError('pattern')
+        "
+        color="accent"
+      >
+        Password must contain atleast one digit,one uppercase letter,and be
+        atleast 8 characters long
+      </mat-error>
+      <mat-error
+        *ngIf="
+          myForm.get('password')?.touched &&
+          myForm.get('password')?.hasError('minlength')
+        "
+        color="accent"
+      >
+        Password must be at least 8 characters long
+      </mat-error>
+
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+      />
+      <mat-error
+        *ngIf="
+          myForm.get('confirmPassword')?.touched &&
+          myForm.get('password')?.value !== myForm.get('confirmPassword')?.value
+        "
+        color="accent"
+      >
+        Passwords do not match
+      </mat-error>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="myForm.invalid"
+      >
+        Sign Up
+      </button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="#">
+      <h1>Sign in</h1>
+      <div class="social-container">
+        <a href="" class="social"> <mat-icon>facebook</mat-icon> </a>
+        <a class="social">
+          <mat-icon>facebook</mat-icon>
+        </a>
+        <a href="" class="social"> <mat-icon>linkedin</mat-icon> </a>
+      </div>
+      <span>or use your account</span>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <a href="#">Forgot your password?</a>
+      <button>Log In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" (click)="signIn()">Log In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" (click)="signUp()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
